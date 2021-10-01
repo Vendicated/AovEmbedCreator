@@ -21,7 +21,7 @@ export function createEmbed(filename: string, heroName: string) {
         image: "UNSPECIFIED",
         fields: [
             {
-                name: "Roles",
+                name: "Role",
                 value: "UNSPECIFIED",
                 inline: true,
             },

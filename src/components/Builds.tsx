@@ -29,7 +29,7 @@ export default function Builds({ updateJson }: SectionProps) {
                 (json.fields[2].value = builds
                     .map(
                         b =>
-                            ` {${abilities[b.ability][0]}} - ${b.items
+                            ` {${abilities[b.ability][0]}} | ${b.items
                                 .filter(Boolean)
                                 .map(i => `{${items[i!][0]}}`)
                                 .join(" ")} `

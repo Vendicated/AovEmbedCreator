@@ -6,7 +6,7 @@ export default function HeroImage(props: Props) {
     const { hero } = props;
     return (
         <img
-            src={process.env.PUBLIC_URL + `images/heroes/${hero}`}
+            src={process.env.PUBLIC_URL + `/images/heroes/${hero}`}
             alt={hero.substring(0, hero.lastIndexOf("."))}
             {...props}
         />

@@ -4,9 +4,12 @@
     "private": true,
     "description": "Embed creator for the Arena of Valor discord server",
     "author": "Vendicated (vendicated@riseup.net)",
+    "homepage": "https://vendicated.github.io/AovEmbedCreator",
     "scripts": {
         "build": "react-scripts build",
+        "deploy": "gh-pages -d build",
         "eject": "react-scripts eject",
+        "predeploy": "yarn build",
         "start": "react-scripts start",
         "test": "react-scripts test"
     },
