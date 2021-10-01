@@ -1,0 +1,15 @@
+$accent-color: orange;
+$accent-text-color: black;
+$danger-color: red;
+$bg-color: #2e3440;
+$bg-secondary-color: #3b4252;
+$text-color: white;
+$text-muted-color: grey;
+
+:root {
+    --accent-color: $accent-color;
+    --bg-color: $bg-color;
+    --bg-secondary-color: $bg-secondary-color;
+    --text-color: $text-color;
+    --text-muted-color: $text-muted-color;
+}

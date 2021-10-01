@@ -1,0 +1,45 @@
+.arcana-body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.arcana-input {
+    width: 33%;
+
+    &:not(:last-child) {
+        margin-right: 0.5em;
+    }
+}
+
+.arcana-input-red {
+    border-color: rgb(188, 62, 66);
+}
+
+.arcana-input-purple {
+    border-color: rgb(113, 68, 149);
+}
+
+.arcana-input-green {
+    border-color: rgb(0, 144, 171);
+}
+
+.arcana-input-active {
+    border-color: red;
+}
+
+@media screen and (max-width: 800px) {
+    .arcana-body {
+        flex-direction: column;
+
+        & .arcana-input {
+            width: 100%;
+
+            &:not(:last-child) {
+                margin-bottom: 1em;
+            }
+        }
+    }
+}

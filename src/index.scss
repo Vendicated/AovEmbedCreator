@@ -1,0 +1,55 @@
+@import "variables";
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Sans-serif";
+
+    background-color: $bg-color;
+    color: $text-color;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+button {
+    padding: 1em 2em;
+    border-radius: 5px;
+    border: 1px solid $accent-color;
+    background-color: $accent-color;
+    color: $accent-text-color;
+}
+
+input {
+    padding: 1em;
+    box-sizing: border-box;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid $accent-color;
+}
+
+.hover-color {
+    color: $text-color;
+    transition: 0.3s color;
+
+    &:hover {
+        color: $accent-color;
+        cursor: pointer;
+    }
+}
+
+footer {
+    clear: both;
+    background-color: $bg-secondary-color;
+    position: relative;
+    margin-top: 2em;
+
+    & p {
+        text-align: center;
+        padding: 0.7em 1em;
+    }
+}

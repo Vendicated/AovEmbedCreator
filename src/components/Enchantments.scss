@@ -1,0 +1,17 @@
+@import "../variables";
+
+.enchantments-image-picker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    & input {
+        margin: 2em 1em;
+        width: 100%;
+    }
+
+    & img {
+        max-width: 100%;
+        border: 1px solid $accent-color;
+    }
+}

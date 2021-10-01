@@ -1,0 +1,26 @@
+@import "variables";
+
+#hero-chooser {
+    text-align: center;
+    width: 90%;
+    padding: 1em;
+    box-sizing: border-box;
+    margin: auto;
+
+    & h1 {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+}
+
+.hero-avatar {
+    display: inline-block;
+    margin: 0.4em;
+    height: 5em;
+    width: 5em;
+
+    & img {
+        height: 100%;
+        width: 100%;
+    }
+}

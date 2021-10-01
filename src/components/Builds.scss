@@ -1,0 +1,68 @@
+@import "../variables";
+
+.build-entry {
+    margin: 0.5em 0;
+}
+
+.build-entry-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & img {
+        width: 2em;
+        height: 2em;
+        border: 1px solid $accent-color;
+        border-radius: 50%;
+        margin-right: 0.5em;
+    }
+
+    & span {
+        margin-left: auto;
+        color: red;
+        font-size: 2em;
+    }
+}
+
+.build-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 20%;
+    padding: 0.5em;
+    box-sizing: border-box;
+    background-color: $bg-color;
+}
+
+.build-item {
+    position: relative;
+    width: 20%;
+
+    &:before {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+        background-color: $bg-secondary-color;
+    }
+
+    &:not(:last-child) {
+        margin-right: 0.5em;
+    }
+}
+
+.build-item-img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#new-build-btn {
+    font-size: 3rem;
+    padding: 0.5rem;
+}

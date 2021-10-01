@@ -1,0 +1,61 @@
+@import "variables";
+
+.hero-wrapper {
+    width: 100%;
+}
+
+.hero-container {
+    margin: 0 auto;
+    width: 50%;
+
+    & section {
+        margin: 2em 0;
+        padding: 1em 2em;
+        background-color: $bg-secondary-color;
+        border-radius: 10px;
+
+        & h2 {
+            text-align: center;
+            padding: 0 1em;
+            padding-bottom: 0.5em;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, $bg-secondary-color 0, $accent-color 50%, $bg-secondary-color) 1;
+        }
+    }
+}
+
+.hero-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    & .hero-avatar {
+        border-radius: 50%;
+        width: 6.5em;
+        height: 6.5em;
+        margin: 1em;
+    }
+}
+
+#back-button {
+    position: sticky;
+    font-size: 3rem;
+    top: 1rem;
+    left: 2rem;
+}
+
+@media screen and (max-width: 800px) {
+    .hero-container {
+        width: 90%;
+
+        & section {
+            padding: 1em 1em;
+        }
+    }
+
+    #back-button {
+        left: 0.3rem;
+        top: 0.15rem;
+    }
+}
