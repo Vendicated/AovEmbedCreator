@@ -14,7 +14,7 @@ interface props {
     onBack: () => void;
 }
 
-const options = ["Jungle", "Top", "Mage", "Adc", "Support"].map(r => ({ value: r, label: r }));
+const options = ["Jungle", "Slayer Lane", "Middle Lane", "Dragon Lane", "Support"].map(r => ({ value: r, label: r }));
 
 export function HeroCreator({ hero, onBack }: props) {
     const heroName = hero.substring(0, hero.lastIndexOf("."));
