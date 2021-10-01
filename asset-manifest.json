@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/AovEmbedCreator/static/css/main.b48ac844.chunk.css",
-    "main.js": "/AovEmbedCreator/static/js/main.16201990.chunk.js",
-    "main.js.map": "/AovEmbedCreator/static/js/main.16201990.chunk.js.map",
+    "main.js": "/AovEmbedCreator/static/js/main.cc01cbf0.chunk.js",
+    "main.js.map": "/AovEmbedCreator/static/js/main.cc01cbf0.chunk.js.map",
     "runtime-main.js": "/AovEmbedCreator/static/js/runtime-main.477ab6b1.js",
     "runtime-main.js.map": "/AovEmbedCreator/static/js/runtime-main.477ab6b1.js.map",
     "static/js/2.4d603564.chunk.js": "/AovEmbedCreator/static/js/2.4d603564.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.477ab6b1.js",
     "static/js/2.4d603564.chunk.js",
     "static/css/main.b48ac844.chunk.css",
-    "static/js/main.16201990.chunk.js"
+    "static/js/main.cc01cbf0.chunk.js"
   ]
 }
