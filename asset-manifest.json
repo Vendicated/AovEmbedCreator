@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/AovEmbedCreator/static/css/main.b48ac844.chunk.css",
-    "main.js": "/AovEmbedCreator/static/js/main.d5af97a1.chunk.js",
-    "main.js.map": "/AovEmbedCreator/static/js/main.d5af97a1.chunk.js.map",
+    "main.js": "/AovEmbedCreator/static/js/main.83b99aed.chunk.js",
+    "main.js.map": "/AovEmbedCreator/static/js/main.83b99aed.chunk.js.map",
     "runtime-main.js": "/AovEmbedCreator/static/js/runtime-main.477ab6b1.js",
     "runtime-main.js.map": "/AovEmbedCreator/static/js/runtime-main.477ab6b1.js.map",
-    "static/js/2.4d603564.chunk.js": "/AovEmbedCreator/static/js/2.4d603564.chunk.js",
-    "static/js/2.4d603564.chunk.js.map": "/AovEmbedCreator/static/js/2.4d603564.chunk.js.map",
+    "static/js/2.59ffc8c2.chunk.js": "/AovEmbedCreator/static/js/2.59ffc8c2.chunk.js",
+    "static/js/2.59ffc8c2.chunk.js.map": "/AovEmbedCreator/static/js/2.59ffc8c2.chunk.js.map",
     "index.html": "/AovEmbedCreator/index.html",
     "static/css/main.b48ac844.chunk.css.map": "/AovEmbedCreator/static/css/main.b48ac844.chunk.css.map",
-    "static/js/2.4d603564.chunk.js.LICENSE.txt": "/AovEmbedCreator/static/js/2.4d603564.chunk.js.LICENSE.txt"
+    "static/js/2.59ffc8c2.chunk.js.LICENSE.txt": "/AovEmbedCreator/static/js/2.59ffc8c2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.477ab6b1.js",
-    "static/js/2.4d603564.chunk.js",
+    "static/js/2.59ffc8c2.chunk.js",
     "static/css/main.b48ac844.chunk.css",
-    "static/js/main.d5af97a1.chunk.js"
+    "static/js/main.83b99aed.chunk.js"
   ]
 }
