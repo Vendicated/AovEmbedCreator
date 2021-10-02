@@ -1,7 +1,8 @@
 import create from "zustand";
 import { IBuild, item, ability } from "./types";
 
-const newBuild = () => ({ name: "Build", ability: "Sprint", items: Array(6).fill(undefined) } as IBuild);
+const newBuild = (idx: number) =>
+    ({ name: "Build " + idx, ability: "Sprint", items: Array(6).fill(undefined) } as IBuild);
 
 interface EmbedStore {
     hero: string;
@@ -20,8 +21,15 @@ interface EmbedStore {
     removeBuild(idx: number): void;
     setBuildItem(buildIdx: number, itemIdx: number, item: item): void;
     setBuildAbility(buildIdx: number, ability: ability): void;
+    setBuildName(buildIdx: number, name: string): void;
     setEnchantment(enchantment: string): void;
     setSpotlight(spotlight: string): void;
+}
+
+function mutateChange<T extends Array<unknown>>(arr: T, fn: (arr: T) => void) {
+    const newArr = arr.slice() as T;
+    fn(newArr);
+    return newArr;
 }
 
 export const useEmbed = create<EmbedStore>(set => ({
@@ -39,7 +47,7 @@ export const useEmbed = create<EmbedStore>(set => ({
             ...data,
             roles: [],
             arcana: ["", "", ""],
-            builds: [newBuild()],
+            builds: [newBuild(1)],
             enchantment: undefined,
             spotlight: undefined,
         });
@@ -47,34 +55,20 @@ export const useEmbed = create<EmbedStore>(set => ({
 
     setRoles: roles => set({ roles }),
 
-    setArcana: (idx, arcana) =>
-        set(state => {
-            const newArcana = state.arcana.slice() as [string, string, string];
-            newArcana[idx] = arcana;
-            return { arcana: newArcana };
-        }),
+    setArcana: (idx, arcana) => set(state => ({ arcana: mutateChange(state.arcana, a => (a[idx] = arcana)) })),
 
-    addBuild: () => set(state => ({ builds: [...state.builds, newBuild()] })),
-    removeBuild: idx =>
-        set(state => {
-            const newBuilds = state.builds.slice();
-            newBuilds.splice(idx, 1);
-            return { builds: newBuilds };
-        }),
+    addBuild: () => set(state => ({ builds: [...state.builds, newBuild(state.builds.length + 1)] })),
+
+    removeBuild: idx => set(state => ({ builds: mutateChange(state.builds, b => b.splice(idx, 1)) })),
 
     setBuildItem: (buildIdx, itemIdx, item) =>
-        set(state => {
-            const newBuilds = state.builds.slice();
-            newBuilds[buildIdx].items[itemIdx] = item;
-            return { builds: newBuilds };
-        }),
+        set(state => ({ builds: mutateChange(state.builds, b => (b[buildIdx].items[itemIdx] = item)) })),
 
     setBuildAbility: (buildIdx, ability) =>
-        set(state => {
-            const newBuilds = state.builds.slice();
-            newBuilds[buildIdx].ability = ability;
-            return { builds: newBuilds };
-        }),
+        set(state => ({ builds: mutateChange(state.builds, b => (b[buildIdx].ability = ability)) })),
+
+    setBuildName: (buildIdx, name) =>
+        set(state => ({ builds: mutateChange(state.builds, b => (b[buildIdx].name = name)) })),
 
     setEnchantment: enchantment => set({ enchantment }),
     setSpotlight: spotlight => set({ spotlight }),

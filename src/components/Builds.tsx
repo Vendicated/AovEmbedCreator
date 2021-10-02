@@ -42,11 +42,13 @@ interface BuildProps {
 }
 
 function Build({ build, idx }: BuildProps) {
-    const [remove, setItem, setAbility] = useEmbed(embed => [
+    const [remove, setItem, setAbility, setBuildName] = useEmbed(embed => [
         embed.removeBuild,
         embed.setBuildItem,
         embed.setBuildAbility,
+        embed.setBuildName,
     ]);
+
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -63,7 +65,12 @@ function Build({ build, idx }: BuildProps) {
             )}
             <div className="build-entry-header">
                 <img src={getEmojiUrl(abilities[build.ability][1])} alt="" onClick={() => setShowModal(true)} />
-                <h3>Build {idx + 1}</h3>
+                <input
+                    className="build-name-input"
+                    type="text"
+                    value={build.name}
+                    onChange={e => setBuildName(idx, e.target.value)}
+                />
                 {idx !== 0 && (
                     <span className="hover-color" onClick={() => remove(idx)}>
                         &times;
@@ -96,7 +103,6 @@ function BuildItem({ iconUrl, onChange }: ItemProps) {
         <div
             className="build-item"
             onClick={() => {
-                console.log("hi");
                 setShowModal(true);
             }}
         >
