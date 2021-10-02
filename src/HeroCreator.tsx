@@ -5,6 +5,7 @@ import Enchantments from "./components/Enchantments";
 import HeroImage from "./components/HeroImage";
 import JsonCodeBlock from "./components/JsonCodeBlock";
 import Select from "./components/Select";
+import heroes from "./data/heroes";
 import "./HeroCreator.scss";
 import { SectionProps } from "./util/types";
 import { createEmbed } from "./util/util";
@@ -17,10 +18,10 @@ interface props {
 const options = ["Jungle", "Slayer Lane", "Middle Lane", "Dragon Lane", "Support"].map(r => ({ value: r, label: r }));
 
 export function HeroCreator({ hero, onBack }: props) {
-    const heroName = hero.substring(0, hero.lastIndexOf("."));
+    const [clazz, image] = heroes[hero];
 
     const [roles, setRoles] = useState<readonly string[]>();
-    const [json, setJson] = useState(createEmbed(hero, heroName));
+    const [json, setJson] = useState(createEmbed(image, hero, clazz));
 
     const props: SectionProps = {
         updateJson(fn: (j: typeof json) => void) {
@@ -36,8 +37,8 @@ export function HeroCreator({ hero, onBack }: props) {
             </span>
             <div className="hero-container">
                 <div className="hero-header">
-                    <HeroImage hero={hero} className="hero-avatar" />
-                    <h1>{heroName}</h1>
+                    <HeroImage hero={image} className="hero-avatar" />
+                    <h1>{hero}</h1>
                 </div>
 
                 <section className="roles-section">
