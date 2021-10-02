@@ -1,0 +1,10 @@
+#spotlight-input {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    & input {
+        margin: 2em 1em;
+        width: 100%;
+    }
+}

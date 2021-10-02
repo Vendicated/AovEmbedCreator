@@ -1,43 +1,30 @@
-import { useState } from "react";
+import shallow from "zustand/shallow";
 import Arcana from "./components/Arcana";
 import Builds from "./components/Builds";
 import Enchantments from "./components/Enchantments";
 import HeroImage from "./components/HeroImage";
-import JsonCodeBlock from "./components/JsonCodeBlock";
+import JsonCodeBlock from "./components/EmbedCodeBlock";
 import Select from "./components/Select";
-import heroes from "./data/heroes";
 import "./HeroCreator.scss";
-import { SectionProps } from "./util/types";
-import { createEmbed } from "./util/util";
-
-interface props {
-    hero: string;
-    onBack: () => void;
-}
+import { useEmbed } from "./util/EmbedManager";
+import Spotlight from "./components/Spotlight";
 
 const options = ["Jungle", "Slayer Lane", "Middle Lane", "Dragon Lane", "Support"].map(r => ({ value: r, label: r }));
 
-export function HeroCreator({ hero, onBack }: props) {
-    const [clazz, image] = heroes[hero];
-
-    const [roles, setRoles] = useState<readonly string[]>();
-    const [json, setJson] = useState(createEmbed(image, hero, clazz));
-
-    const props: SectionProps = {
-        updateJson(fn: (j: typeof json) => void) {
-            fn(json);
-            setJson({ ...json });
-        },
-    };
+export function HeroCreator() {
+    const [hero, heroImage, roles, setRoles] = useEmbed(
+        embed => [embed.hero, embed.heroImage, embed.roles, embed.setRoles],
+        shallow
+    );
 
     return (
         <div className="hero-wrapper">
-            <span id="back-button" className="hover-grow hover-color" onClick={onBack}>
+            <span id="back-button" className="hover-grow hover-color" onClick={() => (window.location.hash = "#")}>
                 &times;
             </span>
             <div className="hero-container">
                 <div className="hero-header">
-                    <HeroImage hero={image} className="hero-avatar" />
+                    <HeroImage hero={heroImage} className="hero-avatar" />
                     <h1>{hero}</h1>
                 </div>
 
@@ -46,11 +33,10 @@ export function HeroCreator({ hero, onBack }: props) {
                     <Select
                         isMulti={true}
                         options={options as any}
-                        value={roles}
+                        value={roles.map(r => ({ value: r, label: r }))}
                         onChange={r => {
-                            setRoles(r);
-                            // @ts-ignore this lib fucking sucks dude
-                            props.updateJson(j => (j.fields[0].value = r.map(i => i.value).join(", ")));
+                            // @ts-ignore this lib's typings fucking suck dude
+                            setRoles(r.map(i => i.value));
                         }}
                         placeholder="Roles"
                     />
@@ -58,22 +44,27 @@ export function HeroCreator({ hero, onBack }: props) {
 
                 <section className="arcana-section">
                     <h2>Arcana</h2>
-                    <Arcana {...props} />
+                    <Arcana />
                 </section>
 
                 <section className="builds-section">
                     <h2>Builds</h2>
-                    <Builds {...props} />
+                    <Builds />
                 </section>
 
                 <section className="enchantments-section">
                     <h2>Enchantments</h2>
-                    <Enchantments {...props} />
+                    <Enchantments />
+                </section>
+
+                <section className="spotlight-section">
+                    <h2>Spotlight</h2>
+                    <Spotlight />
                 </section>
 
                 <section className="json-codeblock">
                     <h2>JSON</h2>
-                    <JsonCodeBlock object={json} {...props} />
+                    <JsonCodeBlock />
                 </section>
             </div>
         </div>

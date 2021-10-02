@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Builds.scss";
 
 import items from "../data/items.json";
 import abilities from "../data/abilities.json";
-import { item, ability, getTypedObjectEntries, SectionProps } from "../util/types";
+import { item, getTypedObjectEntries, IBuild } from "../util/types";
 import { getEmojiUrl } from "../util/util";
 import ChoiceModal from "./ChoiceModal";
+import { useEmbed } from "../util/EmbedManager";
 
 const itemChoices = getTypedObjectEntries(items).map(([name, data]) => ({ name, iconUrl: getEmojiUrl(data[1]) }));
 const talentChoices = getTypedObjectEntries(abilities).map(([name, data]) => ({
@@ -13,55 +14,20 @@ const talentChoices = getTypedObjectEntries(abilities).map(([name, data]) => ({
     iconUrl: getEmojiUrl(data[1]),
 }));
 
-interface IBuild {
-    ability: ability;
-    items: [item?, item?, item?, item?, item?, item?];
-}
-
-const newBuild = () => ({ items: Array(6).fill(undefined), ability: "Sprint" } as IBuild);
-
-export default function Builds({ updateJson }: SectionProps) {
-    const [builds, setBuilds] = useState<IBuild[]>([newBuild()]);
-
-    useEffect(() => {
-        updateJson(
-            json =>
-                (json.fields[2].value = builds
-                    .map(
-                        b =>
-                            ` {${abilities[b.ability][0]}} | ${b.items
-                                .filter(Boolean)
-                                .map(i => `{${items[i!][0]}}`)
-                                .join(" ")} `
-                    )
-                    .join("\n\n"))
-        );
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [builds]);
+export default function Builds() {
+    const [builds, addBuild] = useEmbed(embed => [embed.builds, embed.addBuild]);
 
     return (
         <>
             {builds.map((build, idx) => (
-                <Build
-                    key={`build-${idx}`}
-                    idx={idx}
-                    build={build}
-                    remove={() => {
-                        const newBuilds = builds.slice();
-                        newBuilds.splice(idx, 1);
-                        setBuilds(newBuilds);
-                    }}
-                    buildHasUpdated={() => {
-                        setBuilds(builds.slice());
-                    }}
-                />
+                <Build key={`build-${idx}`} idx={idx} build={build} />
             ))}
 
             <span
                 id="new-build-btn"
                 className="hover-color"
                 onClick={() => {
-                    setBuilds([...builds, newBuild()]);
+                    addBuild();
                 }}
             >
                 &#43;
@@ -73,11 +39,14 @@ export default function Builds({ updateJson }: SectionProps) {
 interface BuildProps {
     idx: number;
     build: IBuild;
-    buildHasUpdated(): void;
-    remove(): void;
 }
 
-function Build({ build, buildHasUpdated, idx, remove }: BuildProps) {
+function Build({ build, idx }: BuildProps) {
+    const [remove, setItem, setAbility] = useEmbed(embed => [
+        embed.removeBuild,
+        embed.setBuildItem,
+        embed.setBuildAbility,
+    ]);
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -86,9 +55,8 @@ function Build({ build, buildHasUpdated, idx, remove }: BuildProps) {
                 <ChoiceModal
                     choices={talentChoices}
                     onChoose={choice => {
+                        setAbility(idx, choice);
                         setShowModal(false);
-                        build.ability = choice;
-                        buildHasUpdated();
                     }}
                     onCancel={() => setShowModal(false)}
                 />
@@ -97,20 +65,19 @@ function Build({ build, buildHasUpdated, idx, remove }: BuildProps) {
                 <img src={getEmojiUrl(abilities[build.ability][1])} alt="" onClick={() => setShowModal(true)} />
                 <h3>Build {idx + 1}</h3>
                 {idx !== 0 && (
-                    <span className="hover-color" onClick={remove}>
+                    <span className="hover-color" onClick={() => remove(idx)}>
                         &times;
                     </span>
                 )}
             </div>
             <div className="build-box">
-                {build.items.map((item, idx) => (
+                {build.items.map((item, i) => (
                     <BuildItem
                         iconUrl={item && getEmojiUrl(items[item][1])}
                         onChange={item => {
-                            build.items[idx] = item;
-                            buildHasUpdated();
+                            setItem(idx, i, item);
                         }}
-                        key={`build-box-${idx}`}
+                        key={`build-box-${i}`}
                     />
                 ))}
             </div>

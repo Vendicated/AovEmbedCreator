@@ -1,19 +1,16 @@
 import { useState } from "react";
 import "./Enchantments.scss";
-import { SectionProps } from "../util/types";
+import { useEmbed } from "../util/EmbedManager";
 
-export default function Enchantments({ updateJson }: SectionProps) {
-    const [imageUrl, setImageUrl] = useState<string>();
+export default function Enchantments() {
+    const [imageUrl, setImageUrl] = useEmbed(embed => [embed.enchantment, embed.setEnchantment]);
     const [errored, setErrored] = useState(false);
 
     return (
         <div className="enchantments-image-picker">
             <input
-                value={imageUrl}
                 onChange={e => {
-                    const url = e.target.value;
-                    setImageUrl(url);
-                    updateJson(e => (e.image = url));
+                    setImageUrl(e.target.value);
                 }}
                 placeholder="Image URL"
             />
